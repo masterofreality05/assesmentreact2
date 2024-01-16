@@ -1,0 +1,18 @@
+We can move through the square in 4 directions
+
+
+Left to right (right)
+
+
+right top corner to right bottom corner (down)
+
+
+bottom right corner to bottom left (left )
+
+
+
+botton left to top left (up)
+
+
+if we set each square to false after adding to array, we can exclude them from iteration (which will be done inside
+the scope of true valued array items. )
