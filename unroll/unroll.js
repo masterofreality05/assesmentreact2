@@ -44,81 +44,28 @@ e.g if i = array.length{
 
 */
 
-    
 function unroll(arrayOfArrays){
-  
   let returningArray = []
-  let itemIterator = 0
-  let downward = 0
-  let backwards = 0
+  if(arrayOfArrays.length === 0) {
+    console.log("reached zero")
+    console.log(returningArray)
+    return returningArray}
+  //top
+  //we add the first array (top) and remove from our arrayOfArrays using shift
+  returningArray.push(...arrayOfArrays.shift())
+  //rightside
+  arrayOfArrays.map(a => returningArray.push(a.pop()))
+  
+  //bottom
+  //remove the last array(bottom) while adding to our return array
+  returningArray.push(...arrayOfArrays.pop())
+  //leftside 
+  
+  arrayOfArrays.reverse().map(a => returningArray.push(a.shift()))
+  unroll(arrayOfArrays)
+}
 
-for(let array of arrayOfArrays){
-  for (let item of array){
-
-    if(item  && itemIterator === array.length - 1){
-      //when we reach the right we want to go down
-      //we need to iterate through arrayOfArrays
-      while(downward < arrayOfArrays.length ){
-        console.log("while downward is before? " + downward)
-        let lastItem = arrayOfArrays[downward][itemIterator]
-        returningArray.push(lastItem)
-        console.log("heres our last item " + lastItem)
-        arrayOfArrays[downward][itemIterator] = false
-        console.log("downward icrementer is" + downward)
-        console.log("incrementing down and setting false " + lastItem)
-        downward++
-      }
  
-   if (downward === arrayOfArrays.length ){
-     //we decrement downwards once, similar to arrayOfArrays.length -1 
-     downward--
-
-     let i = itemIterator
-     while(itemIterator >= 0 ){
-
-     let backwardsItem = arrayOfArrays[downward ][itemIterator]
-     if (backwardsItem){
-   
-     returningArray.push(backwardsItem)
-     arrayOfArrays[downward][itemIterator] = false
-     }
-     itemIterator--
-     }
-   
-     itemIterator++
-   }
-   
-   if(downward === arrayOfArrays.length -1  && itemIterator === 0){
-     console.log("going back up")
-     let upwardItem = arrayOfArrays[downward - 1][itemIterator]
-     console.log(upwardItem)
-     while(downward >= 0 && upwardItem ){
-
-         downward--
-       console.log("should be going back up now " + upwardItem)
-       returningArray.push(upwardItem)
-        arrayOfArrays[downward][itemIterator] = false
-      
-     } 
-  
-   }
-   
-    }
-    else if(item){
-      console.log("ITEM: " + item)
-      arrayOfArrays[downward][itemIterator] = false
-      itemIterator++
-    returningArray.push(item)
-
-  
-    }
-  //here is now we set our directional(conditional) logic. 
-
-
-}
-return returningArray
-}
-}
 
 
 console.log(unroll([[1,2,3,4],[5,6,7,8],[9,10,11,12],[13,14,15,16]]))
